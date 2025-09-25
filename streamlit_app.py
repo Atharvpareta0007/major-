@@ -84,11 +84,16 @@ def inject_global_css(dark_mode: bool) -> None:
     )
 
 
+# ----------- Model Paths -----------
+STUDENT_MODEL_PATH = "path/to/student_model.pth"
+TEACHER_MODEL_PATH = "path/to/teacher_model.pth"
+
+
 # ----------- Mock/Real Prediction Wrappers -----------
 def _attempt_real_predict(audio_path: str) -> Optional[Tuple[str, Dict[str, float], str]]:
     try:
         from inference_utils import predict_from_audio_path
-        return predict_from_audio_path(audio_path)
+        return predict_from_audio_path(audio_path, STUDENT_MODEL_PATH, TEACHER_MODEL_PATH)
     except Exception:
         return None
 
